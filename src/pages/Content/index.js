@@ -1,5 +1,5 @@
 // import {appendModal, modalToggleRunning} from '../../injectModal';
-
+import {appendModal, modalToggleRunning} from './modules/injectModal'
 
 //global scope variable
 let detectNodeWithInterval;
@@ -144,16 +144,18 @@ const addBtnToToolbar = (toolbarEl, btnImgURL) => {
     //test img
     childDiv.appendChild(btnImgURL);
     //modalPin
-    /*     const modalPin = document.createElement('div');
-        modalPin.setAttribute('id', 'modal-pin');
-        modalPin.setAttribute('class', 'hidden'); */
+        // const modalPin = document.createElement('div');
+        // modalPin.setAttribute('id', 'modal-pin');
+        // modalPin.setAttribute('class', 'hidden');
 
     childDiv.appendChild(span);
     btnRootDiv.appendChild(childDiv);
     toolbarEl.appendChild(btnRootDiv);
-    // toolbarEl.appendChild(modalPin);
-    // appendModal(toolbarEl.lastChild);
-    // modalToggleRunning(btnRootDiv, modalPin);
+
+    const body = document.querySelector('html');
+    // body.appendChild(modalPin);
+    appendModal(body);
+    modalToggleRunning(btnRootDiv);
 }
 
 const start = () => {
@@ -197,11 +199,6 @@ const start = () => {
                         refDiv = refDiv.children[0];
                         if (refDiv.lastChild.dataset.testid !== 'emoteButton') {
                             addBtnToToolbar(refDiv, imgEl);
-                            const body = document.querySelector('html');
-                            const modalPin = document.createElement('div');
-                            modalPin.setAttribute('id', 'modal-pin');
-                            body.appendChild(modalPin);
-
                         }
                     }
                     const config = { attributes: false, childList: true, subtree: false }

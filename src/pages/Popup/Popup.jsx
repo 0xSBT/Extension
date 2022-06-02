@@ -46,66 +46,6 @@ const Popup = () => {
     }
   }
 
-
-  // const [toggleSwitch, setToggleSwitch] = useState({bgColor: '#7C5CBF', transform: 'translateX(150%)'});
-  
-  // const [bgColor, setBgColor] = useState('#7C5CBF');
-  // const [transform, setTransform] = useState('translateX(150%)');
-
-
-  // useEffect(async() => {
-  //   const result = await chrome.storage.sync.get(['isExtensionOn']);
-  //   if (result === undefined) alert('popup btn error');
-  //   isExtensionOn = result.isExtensionOn;
-  //   if (isExtensionOn) {
-  //     setToggleSwitch({bgColor: '#7C5CBF', transform: 'translateX(150%)'});
-  //     // setBgColor('#7C5CBF');
-  //     // setTransform('translateX(150%)');
-  //   } else {
-  //     setToggleSwitch({bgColor: 'gray', transform: 'translateX(0%)'});
-  //     // setBgColor('gray');
-  //     // setTransform('translateX(0%)');
-  //   }
-  // }, []);
-
-
-
-  // const switchOnClicked = async() => {
-  //   const result = await chrome.storage.sync.get(['isExtensionOn']);
-  //   if (result === undefined) {
-  //     console.log('could not get extension status');
-  //     return;
-  //   }
-  //   isExtensionOn = !result.isExtensionOn;
-  //   if (isExtensionOn) {
-  //     chrome.storage.sync.set({ isExtensionOn: true }, () => { console.log('Extension is On!!') });
-  //     chrome.storage.sync.set({ lastState: "ON" }, () => { console.log('The last state is On!!') });
-  //     chrome.runtime.sendMessage({
-  //       message: 'setBadgeState',
-  //       state: "ON"
-  //     }, (response) => {
-  //       if (!response.success) console.log("setBadgeState message error!")
-  //     });
-  //     setToggleSwitch({bgColor: '#7C5CBF', transform: 'translateX(150%)'});
-
-  //     // setBgColor('#7C5CBF');
-  //     // setTransform('translateX(150%)');
-  //   } else {
-  //     chrome.storage.sync.set({ isExtensionOn: false }, () => { console.log('Extension is OFF!!') });
-  //     chrome.storage.sync.set({ lastState: "OFF" }, () => { console.log('The last state is OFF!!') });
-  //     chrome.runtime.sendMessage({
-  //       message: 'setBadgeState',
-  //       state: "OFF"
-  //     }, (response) => {
-  //       if (!response.success) console.log("setBadgeState message error!")
-  //     });
-  //     setToggleSwitch({bgColor: 'gray', transform: 'translateX(0%)'});
-
-  //     // setBgColor('gray');
-  //     // setTransform('translateX(0%)');
-  //   }
-  // }
-
   return (
     <div className="App">
       <div className="header">
