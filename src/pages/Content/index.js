@@ -7,24 +7,53 @@ let detectPathWithInterval;
 const DETECT_NODE_INTERVAL = 100; // miliseconds
 const DETECT_URL_INTERVAL = 100; // miliseconds
 
+// clear interval set interval ㄱㄱ
 
 //about route change
 const detectRouteChange = () => {
+    // alert('detectRouteChange')
     let url = location.href;
     let path;
+    let isChanged = false;
+    const RESET_INTERVAL = 100;
+
     detectPathWithInterval = setInterval(() => {
         if (url !== location.href) {
             url = location.href;
             path = location.pathname;
             path = path.substring(1, 9);
             if (path !== 'messages') {
-                stop();
+                stop();//clearInterval
                 start();
+                isChanged = true;
             } else {
-                stop();
+                stop();//clearInterval
+                isChanged = true;
             }
         }
     }, DETECT_URL_INTERVAL)
+
+    let resetInterval = setInterval(()=> {
+        if(isChanged) {
+            isChanged = false;
+            detectPathWithInterval = setInterval(() => {
+                if (url !== location.href) {
+                    url = location.href;
+                    path = location.pathname;
+                    path = path.substring(1, 9);
+                    if (path !== 'messages') {
+                        stop();//clearInterval
+                        start();
+                        isChanged = true;
+                    } else {
+                        stop();//clearInterval
+                        isChanged= true;
+                    }
+                }
+            }, DETECT_URL_INTERVAL)
+        }
+    }, RESET_INTERVAL)
+    
 }
 
 //about mutation observer
@@ -42,8 +71,8 @@ const targetObserver = new MutationObserver(async (mutationList, observer) => {
                 // console.log("emoteCommand :");
                 // console.log(emoteCommand);
                 const emoteURL = await convertCommandToURL(emoteCommand);
-                console.log("emoteURL :");
-                console.log(emoteURL);
+                // console.log("emoteURL :");
+                // console.log(emoteURL);
                 const targetNode = mutationList[i].addedNodes[j].getElementsByClassName('r-bnwqim r-qvutc0')[0];
                 // console.log("targetNode :");
                 // console.log(targetNode);
@@ -159,7 +188,6 @@ const addBtnToToolbar = (toolbarEl, btnImgURL) => {
 }
 
 const start = () => {
-    detectRouteChange();
     detectNodeWithInterval = setInterval(async () => {
         const section = document.getElementsByTagName('section')[0];
         let articleList;
@@ -169,12 +197,8 @@ const start = () => {
             if (targetUnderObservation !== undefined) {
                 articleList = document.getElementsByTagName('article');
                 if (articleList[0] !== undefined) {
-
-                    //node 추가 // command url 바꾸는 것 추가
                     const length = document.getElementsByTagName('article').length;
                     for (let i = 0; i < length; i++) {
-                        // console.log(articleList[i]);
-                        // 아래 에러생기면 articleList[i]조건까지
                         if (articleList[i]) {
                             let emoteIsAdded = articleList[i].getAttribute('data-ooak-emote');
                             // emoteIsAdded >> true or null                            
@@ -201,8 +225,10 @@ const start = () => {
                             addBtnToToolbar(refDiv, imgEl);
                         }
                     }
+                    // detect mutation that articles (appear/hide)
                     const config = { attributes: false, childList: true, subtree: false }
                     targetObserver.observe(targetUnderObservation, config);
+                    // clear interval
                     clearInterval(detectNodeWithInterval);
                 }
             }
@@ -223,9 +249,11 @@ const init = async () => {
         await chrome.storage.sync.set({ lastState: "ON" });
         await chrome.storage.sync.set({ isExtensionOn: true });
         start();
+        detectRouteChange();
     } else if (result.lastState === "ON") {
         stop();
         start();
+        detectRouteChange();
     } else if (result.lastState === "OFF") {
         chrome.runtime.sendMessage({
             message: 'setBadgeState',
@@ -243,6 +271,7 @@ const init = async () => {
         if (isExtensionOn) {
             stop();
             start();
+            detectRouteChange();
         } else {
             stop();
         }

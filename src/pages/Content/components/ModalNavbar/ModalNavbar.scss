@@ -1,28 +1,22 @@
-@font-face {
-    font-family: "Inter-Bold";
-    src: url("chrome-extension://__MSG_@@extension_id__/Inter-Bold.ttf");
-}
-
-.md-nav {
+.md-navbar {
     display: flex;
     flex-direction: row;
     box-shadow: none;
     font-size: 1rem;
 }
 
-.md-nav-content {
+.md-navbar-item {
     font-family: "Inter-Bold";
     cursor: pointer;
     margin: 1rem auto;
     padding: 0.25rem 0.5rem;
-
 }
 
-.md-nav-content:hover {
-    color: white;
+.md-navbar-item:hover {
+    color:white;
 }
 
-.nav-content-clicked {
+.navbar-item-clicked {
     background-color: rgba(255, 255, 255, 0.25);
     color: white;
     border-radius: 2px;

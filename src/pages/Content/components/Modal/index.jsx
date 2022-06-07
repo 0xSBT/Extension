@@ -1,42 +1,39 @@
 import React from 'react'
-import './Modal.scss'
-import ModalNav from '../ModalNav';
+import { useEffect } from 'react';
+import { RecoilRoot } from 'recoil'
 
-// export default class Modal extends React.Component {
-//     render() {
-//         return (
-//             <div className='modal-container'>
-//                 <div className='modal-content'>
-//                     <ModalNav />
-//                     <div class="md-pkglist">
-//                         package list
-//                     </div>
-//                     <div class="md-main">
-//                         <div>
-//                             sss
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
+import ModalNavbar from '../ModalNavbar';
+import PkglistSlide from '../PkglistSlide';
+import EmotesBox from '../EmotesBox';
+
+import './Modal.scss'
 
 function Modal() {
+    const eCategory = {
+        NONE: 0,                       
+        FREE: 1,
+        NFT: 2,
+        DAO: 3,
+        LIST: ["NONE", "FREE", "NFT", "DAO"]
+    }
+
+    useEffect(() => {
+        Object.freeze(eCategory);
+    }, [])
+
+    //FREE >> KlayBee_FREE // NFT >> KlayBee_NFT // DAO >> PDAO
     return (
-        <div className='modal-container'>
-                 <div className='modal-content'>
-                     <ModalNav />
-                     <div class="md-pkglist">
-                         package list
-                     </div>
-                     <div class="md-main">
-                         <div>
-                             sss
-                         </div>
-                     </div>
-                 </div>
-             </div>
+        <RecoilRoot>
+            <div className='modal-container'>
+                <div className='modal-content'>
+                    <ModalNavbar category={eCategory} />
+                    <PkglistSlide category={eCategory} />
+                    <div class="md-main">
+                        <EmotesBox/>
+                    </div>
+                </div>
+            </div>
+        </RecoilRoot>
     )
 }
 

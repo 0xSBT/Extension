@@ -49,7 +49,7 @@ const Popup = () => {
   return (
     <div className="App">
       <div className="header">
-        <img src="../ooak-icon-256.png" alt="ooak-icon-256" width="48" />
+        <img src="./ooak-icon-256.png" alt="ooak-icon-256" width="48" />
         <span className="header-text">OOAK extension</span>
         <div className="toggleButton" onClick={() => { switchOnClicked(); }} style={{ 'backgroundColor': toggleSwitch.bgColor }}>
           <div className="toggleSwitchCircle" style={{ 'transform': toggleSwitch.transform }}></div>

@@ -34,7 +34,11 @@
       "matches": []
     },
     {
-      "resources": ["/public/fonts/Inter-Bold.ttf","/public/fonts/Inter-Medium.ttf"],
+      "resources": ["Inter-Bold.ttf", "Inter-Medium.ttf"],
+      "matches": ["https://*.twitter.com/*"]
+    },
+    {
+      "resources": ["pdao-icon.png"],
       "matches": ["https://*.twitter.com/*"]
     }
   ]
