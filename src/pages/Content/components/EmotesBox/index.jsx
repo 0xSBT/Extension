@@ -28,46 +28,44 @@ const EmotesBox = (props) => {
         }
     }, [pkg])
 
-    const handleClick = () => {
-        //text area에 입력
+    const handleClick = (e) => {
+        // create el
         const el = document.createElement('textarea');
-        el.value = "text";
+        // set text
+        el.value = e.target.dataset.emoteName
         el.setAttribute('readonly', '');
         el.style.position = 'absolute';
         el.style.left = '-9999px';
         document.body.appendChild(el);
         el.select();
-        //
-        document.execCommand
+        // copy and delete temp el
         document.execCommand('copy');
         document.body.removeChild(el);
 
-        // 입력창에 입력
-        const textBox = document.querySelector('[data-text="true"]');
-        textBox.focus();
-        textBox.innerText += "#KlayBee"
+        // paste and close modal
+        // const textBoxes = document.querySelectorAll('[data-testid="tweetTextarea_0"]');
+        const textBoxes = document.querySelectorAll('[role="textbox"]');
+        const len = textBoxes.length;
+        if(len === 1){
+            const lastBox = textBoxes[len - 1];
+            lastBox.setAttribute('data-focusvisible-polyfill', true);
+            lastBox.focus();
+            document.execCommand('paste');
+        } else if (len > 1) {
+            const lastBox = textBoxes[len - 2];
+            lastBox.focus();
+            document.execCommand('paste');
+        }
         props.closeModal();
-    }
 
-    // const copyClipboard = async (
-    //     text,
-    //     successAction,
-    //     failAction
-    // ) => {
-    //     try {
-    //         await navigator.clipboard.writeText(text);
-    //         successAction && successAction();
-    //     } catch (error) {
-    //         failAction && failAction();
-    //     }
-    // }
+        //만약 copy and paste 거부당하면 span 찾아서 innerText로 바꾸자
+    }
 
     return (
         <div className="emote-box-container">
-            <textarea className="temp-text"></textarea>
             {isSelected === true &&
                 pkgToEmoteObj[pkg].list.map((emote, index) => (
-                    <div key={index} className={`emote-img-container ${emote}`} onClick={handleClick} title={emote}><img className={`emote-img ${emote}`} src={`https://gateway.pinata.cloud/ipfs/${pkgToEmoteObj[pkg].hash}/${emote}.${pkgToEmoteObj[pkg].type}`} alt={emote} /></div>
+                    <div key={index} className={`emote-img-container ${emote}`} onClick={handleClick} title={emote} data-emote-name="#KlayB_fly_2"><img className={`emote-img ${emote}`} src={`https://gateway.pinata.cloud/ipfs/${pkgToEmoteObj[pkg].hash}/${emote}.${pkgToEmoteObj[pkg].type}`} alt={emote} data-emote-name="#KlayB_fly_2" /></div>
                 ))
             }
             {isSelected === false &&

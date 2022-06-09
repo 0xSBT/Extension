@@ -4,10 +4,37 @@ import {appendModal, modalToggleRunning} from './modules/injectModal'
 //global scope variable
 let detectNodeWithInterval;
 let detectPathWithInterval;
+let detectResetWithInterval;
 const DETECT_NODE_INTERVAL = 100; // miliseconds
 const DETECT_URL_INTERVAL = 100; // miliseconds
+const DETECT_TWEET_INTERVAL = 100;
 
-// clear interval set interval ㄱㄱ
+//reset after tweet btn is clicked
+const resetAfterTweet = (tweetBtnEl) => {
+    tweetBtnEl.addEventListener('click', () => {
+        detectResetWithInterval = setInterval(()=> {
+            let refDiv = document.querySelectorAll('div[data-testid="toolBar"]')[0];
+            if (refDiv) {
+                refDiv = refDiv.children[0];
+                if (refDiv.lastChild.dataset.testid !== 'emoteButton') {
+                    addBtnToToolbar(refDiv, imgEl);
+                    clearInterval(detectResetWithInterval);
+                }
+            }
+        },DETECT_TWEET_INTERVAL)
+    })
+}
+
+// //handle after modal close
+// const handleModalClose = (modalRoot) => {
+//     modalRoot.addEventListener('focus', () => {
+//         stop();
+//         start();
+//         alert('close modal')
+//     })
+// }
+
+
 
 //about route change
 const detectRouteChange = () => {
@@ -170,16 +197,17 @@ const addBtnToToolbar = (toolbarEl, btnImgURL) => {
     let span = document.createElement('span');
     span.setAttribute('class', "css-901oao css-16my406 css-bfa6kz r-poiln3 r-a023e6 r-rjixqe r-bcqeeo r-qvutc0");
     span.setAttribute('class', "")
-    //test img
+    //btn img
     childDiv.appendChild(btnImgURL);
+    
+    //append modal root to body
+    const body = document.querySelector('html');
+    appendModal(body);
 
     //add modal btn on toolbar
     childDiv.appendChild(span);
     btnRootDiv.appendChild(childDiv);
     toolbarEl.appendChild(btnRootDiv);
-
-    const body = document.querySelector('html');
-    appendModal(body);
     modalToggleRunning(btnRootDiv);
 }
 
@@ -189,6 +217,10 @@ const start = () => {
         let articleList;
         let targetUnderObservation;
         if (section) {
+            //reset after tweet 
+            const tweetBtnEl = document.querySelector('[data-testid="tweetButtonInline"]');
+            resetAfterTweet(tweetBtnEl);
+            //continue
             targetUnderObservation = section.children[1].children[0];
             if (targetUnderObservation !== undefined) {
                 articleList = document.getElementsByTagName('article');

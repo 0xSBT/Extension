@@ -5,7 +5,6 @@ import Modal from '../components/Modal';
 const appendModal = (targetNode) => {
     const rootDiv = document.createElement('div');
     rootDiv.setAttribute('id', 'ooak-modal-root');
-
     targetNode.appendChild(rootDiv);
 }
 
@@ -20,6 +19,7 @@ const modalToggleRunning = (btnEl) => {
                 </React.StrictMode>,
                 root
             )
+            root.setAttribute('data-modal-state', 'open');
     });
     const closeModal = () => {
         const root = document.getElementById('ooak-modal-root');
@@ -29,8 +29,11 @@ const modalToggleRunning = (btnEl) => {
             </React.StrictMode>,
             root
         )
+        root.setAttribute('data-modal-state', 'closed');
     }
 }
+
+
 
 export { appendModal, modalToggleRunning };
 
