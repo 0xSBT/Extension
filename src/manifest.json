@@ -19,7 +19,9 @@
     "128": "ooak-icon-144.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "clipboardWrite",
+    "clipboardRead"
   ],
   "content_scripts": [
     {

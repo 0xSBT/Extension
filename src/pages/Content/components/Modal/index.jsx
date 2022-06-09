@@ -8,7 +8,7 @@ import EmotesBox from '../EmotesBox';
 
 import './Modal.scss'
 
-function Modal() {
+function Modal(props) {
     const eCategory = {
         NONE: 0,                       
         FREE: 1,
@@ -29,7 +29,7 @@ function Modal() {
                     <ModalNavbar category={eCategory} />
                     <PkglistSlide category={eCategory} />
                     <div class="md-main">
-                        <EmotesBox/>
+                        <EmotesBox closeModal={props.closeModal}/>
                     </div>
                 </div>
             </div>

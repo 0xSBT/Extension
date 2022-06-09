@@ -27,24 +27,28 @@ const PkglistSlide = (props) => {
         case props.category.FREE:
             return (
                 <div className="md-pkglist-container">
+                    <div className="md-pkglist-title">Emotes Package</div>
                     <Pkglist pkgName = "FREE" pkglist = {pkglistsInfo}/>
                 </div>
             )
         case props.category.NFT:
             return (
                 <div className="md-pkglist-container">
+                    <div className="md-pkglist-title">Emotes Package</div>
                     <Pkglist pkgName = "NFT" pkglist = {pkglistsInfo}/>
                 </div>
             )
         case props.category.DAO:
             return (
                 <div className="md-pkglist-container">
+                    <div className="md-pkglist-title">Emotes Package</div>
                     <Pkglist pkgName = "DAO" pkglist = {pkglistsInfo}/>
                 </div>
             )
         default:
             return (
                 <div className="md-pkglist-container">
+                    <div className="md-pkglist-title">Emotes Package</div>
                     <Pkglist pkgName = "FREE" pkglist = {pkglistsInfo}/>
                 </div>
             )

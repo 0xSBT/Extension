@@ -172,17 +172,13 @@ const addBtnToToolbar = (toolbarEl, btnImgURL) => {
     span.setAttribute('class', "")
     //test img
     childDiv.appendChild(btnImgURL);
-    //modalPin
-        // const modalPin = document.createElement('div');
-        // modalPin.setAttribute('id', 'modal-pin');
-        // modalPin.setAttribute('class', 'hidden');
 
+    //add modal btn on toolbar
     childDiv.appendChild(span);
     btnRootDiv.appendChild(childDiv);
     toolbarEl.appendChild(btnRootDiv);
 
     const body = document.querySelector('html');
-    // body.appendChild(modalPin);
     appendModal(body);
     modalToggleRunning(btnRootDiv);
 }
