@@ -23,7 +23,7 @@ const detectProfilePage = () => {
 
 const appendIdTagTo = (targetNode) => {
     const targetId = targetNode.getAttribute('id');
-    if (targetId === null) {
+    if (targetId === null) { // if not appended
         targetNode.setAttribute('id', 'id-tag-appended');
         const userId = targetNode.innerText.split('@')[1];
         /* twitterId => id tag(nickname) */
@@ -34,6 +34,9 @@ const appendIdTagTo = (targetNode) => {
                 const nickname = res.data.idTag;
                 const idTagEl = createIdTagEl(nickname);
                 targetNode.appendChild(idTagEl);
+
+                const rootDiv = createDAOListEl('PDAO', 'PDAO/logo.png', 'https://dao.postech.ac.kr/');
+                targetNode.appendChild(rootDiv);
             }
         }).catch((err) => {
             console.log(err)
@@ -41,10 +44,9 @@ const appendIdTagTo = (targetNode) => {
         })
 
         //DAO badge test -> 추후 추가
-        const rootDiv = createDAOListEl('PDAO', 'PDAO/logo.png', 'https://dao.postech.ac.kr/');
-        targetNode.appendChild(rootDiv);
+        
 
-    } else if (targetId === 'id-tag-appended') {
+    } else if (targetId === 'id-tag-appended') { //else if appended
         const userId = targetNode.innerText.split('@')[1];
         const serverURL = `http://localhost:8081/idtag?twitterId=${userId}`;
         axios.get(serverURL).then((res) => {
@@ -75,13 +77,15 @@ const createIdTagEl = (nickname) => {
     const href = 'https://theooak.io'
     
     rootDiv.setAttribute('class', 'id-tag-container');
+    rootDiv.setAttribute('aria-label', 'ID Tag');
     linkEl.setAttribute('href', href);
     linkEl.setAttribute('target', '_blank');
     imgEl.setAttribute('class', 'id-tag id-tag-img');
     imgEl.setAttribute('src', src);
-    imgEl.setAttribute('title', 'ID TAG')
-    imgDiv.setAttribute('class', 'id-tag-img-container id-tag-flex-box')
-    textDiv.setAttribute('class', 'id-tag-flex-box text-box')
+    // imgEl.setAttribute('title', 'ID TAG');
+    imgDiv.setAttribute('class', 'id-tag-img-container id-tag-flex-box hint--top hint--rounded')
+    imgDiv.setAttribute('aria-label', 'ID TAG');
+    textDiv.setAttribute('class', 'id-tag-flex-box text-box');
     textDiv.innerText = nickname;
 
     linkEl.appendChild(imgEl);
@@ -95,6 +99,8 @@ const createDAOListEl = (name, imgPath, href) => {
     const rootDiv = document.createElement('div');
     rootDiv.setAttribute('class', `dao-badge-container dao-${name}`);
     const linkEl = document.createElement('a');
+    linkEl.setAttribute('class', 'hint--top hint--rounded');
+    linkEl.setAttribute('aria-label', `${name}`)
     linkEl.setAttribute('href', href)
     linkEl.setAttribute('target', '_blank')
     const imgEl = document.createElement('img');

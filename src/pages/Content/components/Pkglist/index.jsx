@@ -29,7 +29,11 @@ const Pkglist = (props) => {
         <div className={`md-pkglist ${props.pkgName}`}>
         {
             props.pkglist[props.pkgName].map((pkgObj, index) => (
-                <div key={index} className={`pkg-img-container ${pkgObj.name}`}  onClick={handleClick} title={pkgObj.name}><img className="pkg-img" src={`${baseURL}${pkgObj.path}`} alt={pkgObj.name} data-pkg={pkgObj.name}/></div>
+                <div key={index} id={`pkg-${pkgObj.name}`} className="pkg-wrapper hint--top hint--rounded" aria-label={pkgObj.name}>
+                    <div className={`pkg-img-container`}  onClick={handleClick}>
+                        <img className="pkg-img" src={`${baseURL}${pkgObj.path}`} alt={pkgObj.name} data-pkg={pkgObj.name}/>
+                    </div>
+                </div>
             ))
         }
         </div>

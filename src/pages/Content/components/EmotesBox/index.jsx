@@ -79,11 +79,15 @@ const EmotesBox = (props) => {
         <div className="emote-box-container">
             {(isSelected === true && emotelists[pkg].emotelist.length !==0)&&
                 emotelists[pkg].emotelist.map((emote, index) => (
-                    <div key={index} className={`emote-img-container ${pkg}`} onClick={handleClick} title={`${test[pkg].baseCmd}_${emote.name}`} data-emote-name={emote.name === "logo" ? `#${test[pkg].baseCmd}` : `#${test[pkg].baseCmd}_${emote.name}`}><img className={`emote-img ${pkg}`} src={`${baseURL}${test[pkg].baseCmd}/${emote.name}.${emote.type}`} alt={emote.name} data-emote-name={emote.name === "logo" ? `#${test[pkg].baseCmd}` :`#${test[pkg].baseCmd}_${emote.name}`} /></div>
+                    <div key={index} id = {`emote-${test[pkg].baseCmd}_${emote.name}`} className="emote-wrapper hint--top hint--rounded" aria-label={emote.name === "logo" ? `#${test[pkg].baseCmd}` :`#${test[pkg].baseCmd}_${emote.name}`}>
+                        <div className={`emote-img-container`} onClick={handleClick}>
+                            <img className={`emote-img ${pkg}`} src={`${baseURL}${test[pkg].baseCmd}/${emote.name}.${emote.type}`} alt={emote.name} data-emote-name={emote.name === "logo" ? `#${test[pkg].baseCmd}` :`#${test[pkg].baseCmd}_${emote.name}`} />
+                        </div>
+                    </div>
                 ))
             }
             {(isSelected === true && emotelists[pkg].emotelist.length ===0)&&
-                <div className="emote-box-default">곧 출시될 예정입니다!!!</div>
+                <div className="emote-box-default">출시 예정입니다!!!</div>
             }
             {(isSelected === false && emotelists !== null) &&
                 <div className="emote-box-default">원하는 이모티콘 패키지를 선택해 주세요.</div>

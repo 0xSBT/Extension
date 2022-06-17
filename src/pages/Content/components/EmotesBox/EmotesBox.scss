@@ -1,3 +1,5 @@
+
+
 .emote-box-container {
     font-family: "Inter-Medium";
     display: flex;
@@ -15,6 +17,7 @@
 
 .emote-img-container:hover {
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.22);
 }
 
 .emote-img {

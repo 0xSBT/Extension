@@ -5,14 +5,15 @@
 }
 
 .pkg-img-container {
-    margin: 0 7px;
+    margin: 0 5px;
+    padding: 2px 2px;
     border-radius: 70%;
     background-color: rgba(255, 255, 255, 0.19);
     overflow: hidden;
 }
 
 .pkg-img-container:hover {
-    border-radius: 30%;
+    border-radius: 40%;
     cursor: pointer;
 }
 
@@ -24,6 +25,7 @@
 }
 
 .clicked {
+    border-radius: 10%;
     background-color: rgba(255, 255, 255, 0.33);
 }
 
