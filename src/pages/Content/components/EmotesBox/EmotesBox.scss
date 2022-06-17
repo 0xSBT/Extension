@@ -6,9 +6,10 @@
 }
 
 .emote-img-container {
-    margin: 0 7px;
-    border-radius: 3px;
-    background-color: rgba(255, 255, 255, 0.11);
+    padding: 4.5px;
+    margin: 0 6px;
+    border-radius: 4.5px;
+    background-color: rgba(255, 255, 255, 0.05);
     overflow: hidden;
 }
 
@@ -19,4 +20,12 @@
 .emote-img {
     width: 36px;
     height: 36px;
+    vertical-align: middle;
 }
+
+.emote-box-default {
+    text-align: center;
+    margin: auto;
+    line-height: 230px;
+}
+

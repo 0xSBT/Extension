@@ -56,7 +56,7 @@ const Popup = () => {
         </div>
       </div>
       <div className="main">
-        <span><img src="https://gateway.pinata.cloud/ipfs/QmZCnTukDNb35CVrpcnuvM5bA3Rtj2k6ZqccbWHJjToB5L" alt="KlayBee" width="64" /></span>
+        <span><img src="https://d22p4hblaqdu3x.cloudfront.net/KlayBee/hi.gif" alt="KlayBee" width="64" /></span>
         <span className="main-text">KlayBee is coming soon!!</span>
       </div>
     </div>

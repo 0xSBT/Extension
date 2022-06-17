@@ -1,47 +1,39 @@
-// import {appendModal, modalToggleRunning} from '../../injectModal';
-import {appendModal, modalToggleRunning} from './modules/injectModal'
+import { appendModal, modalToggleRunning } from './modules/injectModal';
+import { detectProfilePage} from './modules/profile';
 
 //global scope variable
 let detectNodeWithInterval;
 let detectPathWithInterval;
 let detectResetWithInterval;
-const DETECT_NODE_INTERVAL = 100; // miliseconds
-const DETECT_URL_INTERVAL = 100; // miliseconds
-const DETECT_TWEET_INTERVAL = 100;
+const DETECT_NODE_INTERVAL = 100; // ms
+const DETECT_URL_INTERVAL = 100; // ms
+const DETECT_TWEET_INTERVAL = 100; // ms
 
 //reset after tweet btn is clicked
 const resetAfterTweet = (tweetBtnEl) => {
-    tweetBtnEl.addEventListener('click', () => {
-        detectResetWithInterval = setInterval(()=> {
-            let refDiv = document.querySelectorAll('div[data-testid="toolBar"]')[0];
-            if (refDiv) {
-                refDiv = refDiv.children[0];
-                if (refDiv.lastChild.dataset.testid !== 'emoteButton') {
-                    addBtnToToolbar(refDiv, imgEl);
-                    clearInterval(detectResetWithInterval);
+    if (tweetBtnEl) {
+        tweetBtnEl.addEventListener('click', () => {
+            detectResetWithInterval = setInterval(() => {
+                let refDiv = document.querySelectorAll('div[data-testid="toolBar"]')[0];
+                if (refDiv) {
+                    refDiv = refDiv.children[0];
+                    if (refDiv.lastChild.dataset.testid !== 'emoteButton') {
+                        const imgEl = createIdTagImgEl();
+                        addBtnToToolbar(refDiv, imgEl);
+                        clearInterval(detectResetWithInterval);
+                    }
                 }
-            }
-        },DETECT_TWEET_INTERVAL)
-    })
+            }, DETECT_TWEET_INTERVAL)
+        })
+    }
 }
-
-// //handle after modal close
-// const handleModalClose = (modalRoot) => {
-//     modalRoot.addEventListener('focus', () => {
-//         stop();
-//         start();
-//         alert('close modal')
-//     })
-// }
-
-
 
 //about route change
 const detectRouteChange = () => {
-    // alert('detectRouteChange')
     let url = location.href;
     let path;
     let isChanged = false;
+    let isProfile = false;
     const RESET_INTERVAL = 100;
 
     detectPathWithInterval = setInterval(() => {
@@ -53,6 +45,7 @@ const detectRouteChange = () => {
                 stop();//clearInterval
                 start();
                 isChanged = true;
+                detectProfilePage();
             } else {
                 stop();//clearInterval
                 isChanged = true;
@@ -60,8 +53,8 @@ const detectRouteChange = () => {
         }
     }, DETECT_URL_INTERVAL)
 
-    let resetInterval = setInterval(()=> {
-        if(isChanged) {
+    let resetInterval = setInterval(() => {
+        if (isChanged) {
             isChanged = false;
             detectPathWithInterval = setInterval(() => {
                 if (url !== location.href) {
@@ -72,15 +65,16 @@ const detectRouteChange = () => {
                         stop();//clearInterval
                         start();
                         isChanged = true;
+                        detectProfilePage();
                     } else {
                         stop();//clearInterval
-                        isChanged= true;
+                        isChanged = true;
                     }
                 }
             }, DETECT_URL_INTERVAL)
         }
     }, RESET_INTERVAL)
-    
+
 }
 
 //about mutation observer
@@ -115,13 +109,15 @@ const targetObserver = new MutationObserver(async (mutationList, observer) => {
     }
 });
 
-//test IMG
-const baseURL = 'https://gateway.pinata.cloud/ipfs/QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn/';
-const ooak_icon = 'https://gateway.pinata.cloud/ipfs/QmVuiwFkhgdPCyhB58Y9drXfnDgjMt2brFKpvTjcegXrUp';
-let imgEl = document.createElement('IMG');
-imgEl.setAttribute('src', ooak_icon);
-imgEl.setAttribute('width', "18");
-
+//create ooak-icon img
+const createIdTagImgEl =  () => {
+    const ooak_icon_src = 'https://d22p4hblaqdu3x.cloudfront.net/ID_TAG_ICONS/logo18.png';
+    const imgEl = document.createElement('IMG');
+    imgEl.setAttribute('class', 'id-tag-img');
+    imgEl.setAttribute('src', ooak_icon_src);
+    imgEl.setAttribute('width', "18");
+    return imgEl;
+}
 
 //return EmoteCommand string // TN targetNode
 const findCommandFromTN = (refNode) => {
@@ -164,7 +160,6 @@ const appendEmoteToTN = (emoteCommand, imgURL, targetNode) => {
 const clearAllEmotes = () => {
     const targetArticleList = document.querySelectorAll('[data-ooak-emote = "true"]');
     const targetNodeList = document.querySelectorAll('[data-emote-div = "true"]');
-    // console.log(targetArticleList)
     if (targetArticleList[0]) {
         for (let i = 0; i < targetNodeList.length; i++) {
             targetArticleList[i].removeAttribute('data-ooak-emote');
@@ -199,7 +194,7 @@ const addBtnToToolbar = (toolbarEl, btnImgURL) => {
     span.setAttribute('class', "")
     //btn img
     childDiv.appendChild(btnImgURL);
-    
+
     //append modal root to body
     const body = document.querySelector('html');
     appendModal(body);
@@ -250,6 +245,7 @@ const start = () => {
                     if (refDiv) {
                         refDiv = refDiv.children[0];
                         if (refDiv.lastChild.dataset.testid !== 'emoteButton') {
+                            const imgEl = createIdTagImgEl();
                             addBtnToToolbar(refDiv, imgEl);
                         }
                     }
@@ -272,6 +268,7 @@ const stop = () => {
 }
 
 const init = async () => {
+    detectProfilePage();
     const result = await chrome.storage.sync.get(['lastState']);
     if (result.lastState === undefined) {
         await chrome.storage.sync.set({ lastState: "ON" });
@@ -312,15 +309,3 @@ window.onload = () => {
 }
 
 
-
-
-// home에서 등록시 트윗 적는 곳
-//div class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
-// div 밑 span data-offset-key="a1dcl-0-0"
-// span밑 data-text="true"
-//document.querySelectorAll('span[data-text=true]')[0];
-
-// home에서 등록시 버튼 있는 곳
-// div class="css-1dbjc4n r-1awozwy r-18u37iz r-1s2bzr4"
-// data-testid="toolBar"
-//document.querySelectorAll('div[data-testid="toolBar"]')[0];

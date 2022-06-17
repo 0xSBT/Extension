@@ -2,6 +2,14 @@
     font-family: "Inter-Bold";
     src: url("chrome-extension://__MSG_@@extension_id__/Inter-Bold.ttf");
 }
+@font-face {
+    font-family: "Inter-Medium";
+    src: url("chrome-extension://__MSG_@@extension_id__/Inter-Medium.ttf");
+}
+@font-face {
+    font-family: "RussoOne";
+    src: url("chrome-extension://__MSG_@@extension_id__/RussoOne-Regular.ttf");
+}
 
 #ooak-modal-root {
     position: absolute;
@@ -27,4 +35,30 @@
     left: 0;
 
     background-color: rgba(0,0,0, 0.22);
+}
+
+.id-tag-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 24px;
+    font-family: 'RussoOne';
+    font-size: 18px;
+    color: #7C5CBF;
+    margin: 3px 0px;
+    text-align: center;
+}
+
+.id-tag-img {
+    vertical-align: middle;
+}
+
+.id-tag-flex-box {
+    height: 24px;
+    margin: 0 3px 0 0;
+}
+
+.id-tag-img-container {
+    padding: 0 0 5px 0;
 }

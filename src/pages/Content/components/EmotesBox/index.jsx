@@ -2,23 +2,38 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import selectedPkg from "../../modules/selectedPkg";
+import axios from "axios";
 
 import "./EmotesBox.scss";
 
 
 const EmotesBox = (props) => {
-
+    const baseURL = "https://d22p4hblaqdu3x.cloudfront.net/";
     const [pkg, selectPkg] = useRecoilState(selectedPkg);
     const [isSelected, setIsSelected] = useState(false);
+    const [emotelists, setEmotelists] = useState(null);
 
-    //load obj from server 로 고쳐야함 일단 하드코딩
-    const pkgToEmoteObj = {
-        NONE: { list: [] },
-        OOAK_Free: { type: "gif", hash: "QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn", list: ["fly", "fly_2", "greeting", "heart"] },
-        KlayBee_Free: { type: "gif", hash: "QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn", list: ["fly", "fly_2", "greeting", "heart"] },
-        KlayBee_NFT: { type: "gif", hash: "QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn", list: ["fly", "fly_2", "greeting", "heart"] },
-        PDAO: { type: "gif", hash: "QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn", list: ["fly", "fly_2", "greeting", "heart"] },
+    // load obj from server 로 고쳐야함 일단 하드코딩
+    // key: pkg -> 이모티콘 리스트(path, list, )
+    // baseURL/${pkg}/emoticon file(path)
+    // emotelist: [{name: command, type: gif , png or jpg...}...]:  
+    const test = {
+        NONE: {emotelist: []},
+        OOAK_Free: {baseCmd: "OOAK", emotelist: [{name: "logo", type:"png"},{name: "ID_TAG", type:"png"}]},
+        KlayBee_Free: {baseCmd: "KlayBee", emotelist: [{name: "hi", type:"gif"},{name: "heart", type:"gif"},{name: "fly", type:"gif"}]},
+        KlayBee_NFT: {emotelist: []},
+        PDAO: {baseCmd: "PDAO", emotelist: [{name: "logo", type:"png"},{name: "pepe", type:"png"}]}
     }
+    useEffect(()=>{
+        const serverUrl = "https://onyx-osprey-353112.du.r.appspot.com/emotelists";
+        axios.get(serverUrl).then((res)=> {
+            let obj = res.data;
+            setEmotelists({...obj});
+        }).catch((err)=>{
+            console.log(err)
+            alert('서버에 문제가 생겨 복구 중입니다...')
+        })
+    },[])
 
     useEffect(() => {
         if (pkg !== "NONE") {
@@ -42,8 +57,7 @@ const EmotesBox = (props) => {
         document.execCommand('copy');
         document.body.removeChild(el);
 
-        // paste and close modal
-        // const textBoxes = document.querySelectorAll('[data-testid="tweetTextarea_0"]');
+        // paste and close modal        
         const textBoxes = document.querySelectorAll('[role="textbox"]');
         const len = textBoxes.length;
         if(len === 1){
@@ -63,13 +77,19 @@ const EmotesBox = (props) => {
 
     return (
         <div className="emote-box-container">
-            {isSelected === true &&
-                pkgToEmoteObj[pkg].list.map((emote, index) => (
-                    <div key={index} className={`emote-img-container ${emote}`} onClick={handleClick} title={emote} data-emote-name="#KlayB_fly_2"><img className={`emote-img ${emote}`} src={`https://gateway.pinata.cloud/ipfs/${pkgToEmoteObj[pkg].hash}/${emote}.${pkgToEmoteObj[pkg].type}`} alt={emote} data-emote-name="#KlayB_fly_2" /></div>
+            {(isSelected === true && emotelists[pkg].emotelist.length !==0)&&
+                emotelists[pkg].emotelist.map((emote, index) => (
+                    <div key={index} className={`emote-img-container ${pkg}`} onClick={handleClick} title={`${test[pkg].baseCmd}_${emote.name}`} data-emote-name={emote.name === "logo" ? `#${test[pkg].baseCmd}` : `#${test[pkg].baseCmd}_${emote.name}`}><img className={`emote-img ${pkg}`} src={`${baseURL}${test[pkg].baseCmd}/${emote.name}.${emote.type}`} alt={emote.name} data-emote-name={emote.name === "logo" ? `#${test[pkg].baseCmd}` :`#${test[pkg].baseCmd}_${emote.name}`} /></div>
                 ))
             }
-            {isSelected === false &&
-                <div>준비 중입니다.</div>
+            {(isSelected === true && emotelists[pkg].emotelist.length ===0)&&
+                <div className="emote-box-default">곧 출시될 예정입니다!!!</div>
+            }
+            {(isSelected === false && emotelists !== null) &&
+                <div className="emote-box-default">원하는 이모티콘 패키지를 선택해 주세요.</div>
+            }
+            {emotelists === null &&
+                <div className="emote-box-default">잠시만 기다려 주세요.</div>
             }
         </div>
     )

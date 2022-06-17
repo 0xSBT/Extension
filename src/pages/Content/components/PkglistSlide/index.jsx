@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import selectedCategory from "../../modules/selectedCategory";
+import selectedPkg from "../../modules/selectedPkg";
 import { useRecoilState } from "recoil";
+import axios from 'axios';
 
 import Pkglist from "../Pkglist";
 
 import "./PkglistSlide.scss";
 
 
-// const pkglistsInfo = {
-//     FREE : [{name: , imgURL:}, {name: , imgURL:}, {name: , imgURL:}, ...]
-//     NFT : [{name: , imgURL:}, {name: , imgURL:}, {name: , imgURL:}, ...]
-//      DAO : [{name: , imgURL:}, {name: , imgURL:}, {name: , imgURL:}, ...]
-//  } 
-
-
 const PkglistSlide = (props) => {
     const [category, setCategory] = useRecoilState(selectedCategory);
-
-    const [pkglistsInfo, setPkglistsInfo] = useState({
-        FREE : [{name: "OOAK_Free", imgURL:"https://gateway.pinata.cloud/ipfs/QmaaDdBFPrXMCnJ6CCCjTYuZCnsbm4vhG32ngNGs2kWrpY"}, {name: "KlayBee_Free", imgURL:"https://gateway.pinata.cloud/ipfs/QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn/greeting.gif"}],
-        NFT : [{name: "KlayBee_NFT", imgURL:"https://gateway.pinata.cloud/ipfs/QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn/greeting.gif"}],
-        DAO : [{name: "PDAO", imgURL:"https://gateway.pinata.cloud/ipfs/Qma93f8F2pmB3ndwKG4yy4qih1NAEK8JgfPR9Faj7sQSnh"}]
-    });
+    const [pkg, setPkg] = useRecoilState(selectedPkg);
+    const [pkglistsInfo, setPkglistsInfo] = useState({FREE:[], NFT:[],DAO:[]});
+    useEffect(()=>{
+        setPkg("NONE");
+    },[category])
+    useEffect(()=>{
+        const serverUrl = "https://onyx-osprey-353112.du.r.appspot.com/pkglists/info";
+        axios.get(serverUrl).then((res)=> {
+            let obj = res.data;
+            setPkglistsInfo({...obj});
+        }).catch((err)=>{
+            alert('서버에 문제가 생겨 복구 중입니다...')
+        })
+    },[])
     
     switch (category) {
         case props.category.FREE:

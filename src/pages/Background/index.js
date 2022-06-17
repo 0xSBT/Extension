@@ -1,21 +1,23 @@
 //test map
 const emoteCommandToURL = new Map();
-const baseURL = 'https://gateway.pinata.cloud/ipfs/QmUNbq38LSe89g57RYBiaaSHgF4yvYiXWRggn3QM6CtDWn/';
-const imgURL_heart = baseURL + "heart.gif"
-const imgURL_greeting = baseURL + "greeting.gif"
-const imgURL_fly = baseURL + "fly.gif"
-const imgURL_fly_2 = baseURL + "fly_2.gif"
-const imgURL_PDAO = 'https://gateway.pinata.cloud/ipfs/Qma93f8F2pmB3ndwKG4yy4qih1NAEK8JgfPR9Faj7sQSnh';
+const baseURL = 'https://d22p4hblaqdu3x.cloudfront.net/';
+const imgURL_heart = baseURL + "KlayBee/heart.gif"
+const imgURL_hi = baseURL + "KlayBee/hi.gif"
+const imgURL_fly = baseURL + "KlayBee/fly.gif"
+const imgURL_PDAO = baseURL + 'PDAO/logo.png';
+const imgURL_PDAO_pepe = baseURL + 'PDAO/pepe.png'
+const imgURL_OOAK = baseURL + 'OOAK/logo.png'
+const imgURL_OOAK_ID_TAG = baseURL + 'OOAK/ID_TAG.png'
 
 //test img
-emoteCommandToURL.set("KlayB_heart", imgURL_heart);
-emoteCommandToURL.set("KlayB_hi", imgURL_greeting);
-emoteCommandToURL.set("KlayB_fly", imgURL_fly);
-emoteCommandToURL.set("KlayB_fly_2", imgURL_fly_2);
+emoteCommandToURL.set("KlayBee_heart", imgURL_heart);
+emoteCommandToURL.set("KlayBee_hi", imgURL_hi);
+emoteCommandToURL.set("KlayBee_fly", imgURL_fly);
 emoteCommandToURL.set("PDAO", imgURL_PDAO);
-
+emoteCommandToURL.set("PDAO_pepe", imgURL_PDAO_pepe);
+emoteCommandToURL.set("OOAK",imgURL_OOAK);
+emoteCommandToURL.set("OOAK_ID_TAG",imgURL_OOAK_ID_TAG);
 //test img 추가
-// emoteCommandToURL.set("NFT", imgURL_fly_2);
 
 
 

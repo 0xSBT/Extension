@@ -32,15 +32,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["content.styles.css"],
-      "matches": []
-    },
-    {
-      "resources": ["Inter-Bold.ttf", "Inter-Medium.ttf"],
-      "matches": ["https://*.twitter.com/*"]
-    },
-    {
-      "resources": ["pdao-icon.png"],
+      "resources": ["Inter-Bold.ttf", "Inter-Medium.ttf", "RussoOne-Regular.ttf"],
       "matches": ["https://*.twitter.com/*"]
     }
   ]
