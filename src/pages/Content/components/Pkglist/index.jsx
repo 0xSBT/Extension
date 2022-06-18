@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+import selectedCategory from "../../modules/selectedCategory";
 import selectedPkg from "../../modules/selectedPkg";
 
 import "./Pkglist.scss";
 
 const Pkglist = (props) => {
     const baseURL = "https://d22p4hblaqdu3x.cloudfront.net";
+    const [category, setCategory] = useRecoilState(selectedCategory);
     const [pkg, selectPkg] = useRecoilState(selectedPkg);
     const [prevDiv, setPrevDiv] = useState(null);
 
@@ -13,7 +15,7 @@ const Pkglist = (props) => {
         if(prevDiv) {
             prevDiv.classList.remove('clicked')
         }
-    },[])
+    },[category])
 
     const handleClick = (e) => {
         if(prevDiv) {
