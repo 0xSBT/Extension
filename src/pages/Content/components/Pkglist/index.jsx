@@ -18,16 +18,25 @@ const Pkglist = (props) => {
     },[category])
 
     const handleClick = (e) => {
-        if(!e) {
-            return;
-        }
         if(prevDiv) {
             prevDiv.classList.remove('clicked')
         }
         const currentDiv = e.target.parentElement;
         currentDiv.classList.add('clicked');
         setPrevDiv(currentDiv);
-        selectPkg(e.target.dataset.pkg);
+
+        let count  = 0;
+        const INTERVAL = 50;
+        let timer = setInterval(()=> {
+            if(e.target.dataset.pkg) {
+                selectPkg(e.target.dataset.pkg);
+                clearInterval(timer);
+            } else {
+                if(count >= 5) clearInterval(timer);
+                count++;
+            }
+        }, INTERVAL)
+        
     }
 
     return (

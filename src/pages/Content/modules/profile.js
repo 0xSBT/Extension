@@ -11,10 +11,8 @@ const detectProfilePage = () => {
             appendIdTagTo(userNameBox);
             clearInterval(detectProfileWithInterval)
         } else {
-            //useNameBox가 안찾아짐 => 5초 뒤 포기 , 동일 path  OR useNameBox가 안찾아지는데 path는 바뀌었을 때 => 10초동안은 계속 찾음
             count++;
             if (count >= 5) {
-                // alert('over 5 seconds')                
                 clearInterval(detectProfileWithInterval)
             }
         }
@@ -24,9 +22,7 @@ const detectProfilePage = () => {
 const appendIdTagTo = (targetNode) => {
     const targetId = targetNode.getAttribute('id');
     const baseURL = "https://onyx-osprey-353112.du.r.appspot.com/"
-    // const baseURL = "http://localhost:8081/"
     if (targetId === null) { // if not appended
-
         targetNode.setAttribute('id', 'id-tag-appended');
         let userId = targetNode.innerText.split('@')[1];
         userId = userId.split('\n')[0];
@@ -108,7 +104,6 @@ const createIdTagEl = (nickname) => {
     linkEl.setAttribute('target', '_blank');
     imgEl.setAttribute('class', 'id-tag id-tag-img');
     imgEl.setAttribute('src', src);
-    // imgEl.setAttribute('title', 'ID TAG');
     imgDiv.setAttribute('class', 'id-tag-img-container id-tag-flex-box hint--top hint--rounded')
     imgDiv.setAttribute('aria-label', 'ID TAG');
     textDiv.setAttribute('class', 'id-tag-flex-box id-tag-text-box');
@@ -141,7 +136,6 @@ const createDAOEl = (name, imgPath, href) => {
     linkEl.setAttribute('target', '_blank')
     const imgEl = document.createElement('img');
     imgEl.setAttribute('class', 'dao-badge dao-badge-img');
-    imgEl.setAttribute('title', `${name}`);
     imgEl.setAttribute('src', `https://d22p4hblaqdu3x.cloudfront.net/${imgPath}`);
     imgEl.setAttribute('width', 21);
 
@@ -165,6 +159,7 @@ const resetProfilePage = () => {
     const userNameBox = document.querySelector('[data-testid="UserName"]');
         if (userNameBox) appendIdTagTo(userNameBox);
 }
+
 
 
 

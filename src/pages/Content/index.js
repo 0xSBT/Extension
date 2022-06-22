@@ -230,7 +230,7 @@ const start = () => {
                                 let emoteURL = await convertCommandToURL(emoteCommand);
                                 // console.log("emote url : " + emoteURL);
                                 if (emoteURL !== '' && emoteURL !== undefined) {
-                                    if (articleList[i].getAttribute('data-ooak-emote') !== "true") {
+                                    if (articleList[i] && articleList[i].getAttribute('data-ooak-emote') !== "true") {
                                         articleList[i].setAttribute("data-ooak-emote", true);
                                         let targetNode = articleList[i].getElementsByClassName('r-bnwqim r-qvutc0')[0];
                                         appendEmoteToTN(emoteCommand, emoteURL, targetNode);

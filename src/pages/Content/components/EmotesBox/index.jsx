@@ -36,7 +36,6 @@ const EmotesBox = (props) => {
     },[])
 
     useEffect(() => {
-        console.log(pkg);
         if (pkg && pkg !== "NONE") {
             setIsSelected(true);
         } else {
@@ -48,7 +47,7 @@ const EmotesBox = (props) => {
         // create el
         const el = document.createElement('textarea');
         // set text
-        const INTERVAL = 100;
+        const INTERVAL = 50;
         let count = 0;
         let timer = setInterval(()=> {
             if(e.target.dataset.emoteName) {
