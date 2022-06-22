@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ooak-extension",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
+  "description": "A chrome extension for DAO, NFTs, Free memes and emotes",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_title": "ooak extension",

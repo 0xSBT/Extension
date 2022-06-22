@@ -18,6 +18,9 @@ const Pkglist = (props) => {
     },[category])
 
     const handleClick = (e) => {
+        if(!e) {
+            return;
+        }
         if(prevDiv) {
             prevDiv.classList.remove('clicked')
         }

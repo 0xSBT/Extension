@@ -1,5 +1,5 @@
 import { appendModal, modalToggleRunning } from './modules/injectModal';
-import { detectProfilePage} from './modules/profile';
+import { detectProfilePage, pauseControlProfilePage, resetProfilePage} from './modules/profile';
 
 //global scope variable
 let detectNodeWithInterval;
@@ -33,7 +33,6 @@ const detectRouteChange = () => {
     let url = location.href;
     let path;
     let isChanged = false;
-    let isProfile = false;
     const RESET_INTERVAL = 100;
 
     detectPathWithInterval = setInterval(() => {
@@ -265,21 +264,24 @@ const stop = () => {
     clearAllEmotes();
     clearInterval(detectNodeWithInterval);
     clearInterval(detectPathWithInterval);
+    pauseControlProfilePage();
 }
 
 const init = async () => {
-    detectProfilePage();
     const result = await chrome.storage.sync.get(['lastState']);
     if (result.lastState === undefined) {
         await chrome.storage.sync.set({ lastState: "ON" });
         await chrome.storage.sync.set({ isExtensionOn: true });
         start();
         detectRouteChange();
+        detectProfilePage();
     } else if (result.lastState === "ON") {
         stop();
         start();
+        detectProfilePage();
         detectRouteChange();
     } else if (result.lastState === "OFF") {
+        stop();
         chrome.runtime.sendMessage({
             message: 'setBadgeState',
             state: "OFF"
@@ -297,6 +299,7 @@ const init = async () => {
             stop();
             start();
             detectRouteChange();
+            resetProfilePage();
         } else {
             stop();
         }

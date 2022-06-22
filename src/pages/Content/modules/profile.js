@@ -23,42 +23,68 @@ const detectProfilePage = () => {
 
 const appendIdTagTo = (targetNode) => {
     const targetId = targetNode.getAttribute('id');
+    const baseURL = "https://onyx-osprey-353112.du.r.appspot.com/"
+    // const baseURL = "http://localhost:8081/"
     if (targetId === null) { // if not appended
+
         targetNode.setAttribute('id', 'id-tag-appended');
-        const userId = targetNode.innerText.split('@')[1];
-        /* twitterId => id tag(nickname) */
-        const serverURL = `http://localhost:8081/idtag?twitterId=${userId}`;
+        let userId = targetNode.innerText.split('@')[1];
+        userId = userId.split('\n')[0];
+
+        const serverURL = `${baseURL}idtag?twitterId=${userId}`;
         axios.get(serverURL).then((res) => {
             const result = res.data.result;
             if (result === "success") {
+                //id tag
                 const nickname = res.data.idTag;
                 const idTagEl = createIdTagEl(nickname);
                 targetNode.appendChild(idTagEl);
-
-                const rootDiv = createDAOListEl('PDAO', 'PDAO/logo.png', 'https://dao.postech.ac.kr/');
-                targetNode.appendChild(rootDiv);
+                //dao list
+                const DAOArr = res.data.DAO;
+                const DAOlistEl = createDAOlistEl(DAOArr);
+                targetNode.appendChild(DAOlistEl);
             }
         }).catch((err) => {
             console.log(err)
             alert('서버에 문제가 생겨 복구 중입니다...')
         })
 
-        //DAO badge test -> 추후 추가
         
 
     } else if (targetId === 'id-tag-appended') { //else if appended
-        const userId = targetNode.innerText.split('@')[1];
-        const serverURL = `http://localhost:8081/idtag?twitterId=${userId}`;
+        
+        let userId = targetNode.innerText.split('@')[1];
+        userId = userId.split('\n')[0];
+        const serverURL = `${baseURL}idtag?twitterId=${userId}`;
         axios.get(serverURL).then((res) => {
             const result = res.data.result;
             if (result === "success") {
+                //id tag
                 const nickname = res.data.idTag;
-                const textDiv = targetNode.querySelector('div.text-box');
-                textDiv.innerText = nickname;
+                const textDiv = targetNode.querySelector('div.id-tag-text-box');
+                if(textDiv) {
+                    textDiv.innerText = nickname;
+                } else {
+                    const idTagEl = createIdTagEl(nickname);
+                    targetNode.appendChild(idTagEl);
+                }
+                //dao list
+                const DAOArr = res.data.DAO;
+                const DAOlistContainer = targetNode.querySelector('div.daolist-container');
+                if(DAOlistContainer) {
+                    DAOlistContainer.remove();
+                    const DAOlistEl = createDAOlistEl(DAOArr);
+                    targetNode.appendChild(DAOlistEl);
+                } else {
+                    const DAOlistEl = createDAOlistEl(DAOArr);
+                    targetNode.appendChild(DAOlistEl);
+                }
             } else {
                 targetNode.removeAttribute('id');
-                const idTagRootDiv = targetNode.querySelector('div.id-tag-container');
-                idTagRootDiv.remove();
+                const idTagContainer = targetNode.querySelector('div.id-tag-container');
+                const DAOlistContainer = targetNode.querySelector('div.daolist-container');
+                if(idTagContainer) idTagContainer.remove();
+                if(DAOlistContainer) DAOlistContainer.remove();
             }
         }).catch((err) => {
             console.log(err)
@@ -74,7 +100,7 @@ const createIdTagEl = (nickname) => {
     const imgEl = document.createElement('img');
     const textDiv = document.createElement('div');
     const src = 'https://d22p4hblaqdu3x.cloudfront.net/ID_TAG_ICONS/logo18.png';
-    const href = 'https://theooak.io'
+    const href = 'https://theooak.io';
     
     rootDiv.setAttribute('class', 'id-tag-container');
     rootDiv.setAttribute('aria-label', 'ID Tag');
@@ -85,7 +111,7 @@ const createIdTagEl = (nickname) => {
     // imgEl.setAttribute('title', 'ID TAG');
     imgDiv.setAttribute('class', 'id-tag-img-container id-tag-flex-box hint--top hint--rounded')
     imgDiv.setAttribute('aria-label', 'ID TAG');
-    textDiv.setAttribute('class', 'id-tag-flex-box text-box');
+    textDiv.setAttribute('class', 'id-tag-flex-box id-tag-text-box');
     textDiv.innerText = nickname;
 
     linkEl.appendChild(imgEl);
@@ -95,7 +121,17 @@ const createIdTagEl = (nickname) => {
     return rootDiv;
 }
 
-const createDAOListEl = (name, imgPath, href) => {
+const createDAOlistEl = (DAOArr) => {
+    const rootDiv = document.createElement('div');
+    rootDiv.setAttribute('class', 'daolist-container')
+    DAOArr.forEach(obj => {
+        const DAOEl = createDAOEl(obj.name, obj.imgPath, obj.href);
+        rootDiv.appendChild(DAOEl);
+    });
+    return rootDiv;
+}
+
+const createDAOEl = (name, imgPath, href) => {
     const rootDiv = document.createElement('div');
     rootDiv.setAttribute('class', `dao-badge-container dao-${name}`);
     const linkEl = document.createElement('a');
@@ -114,6 +150,22 @@ const createDAOListEl = (name, imgPath, href) => {
     return rootDiv;
 }
 
+const pauseControlProfilePage = () => {
+    const userNameBox = document.querySelector('[data-testid="UserName"]');
+    if(userNameBox){
+        userNameBox.removeAttribute('id');
+        const idTagContainer = userNameBox.querySelector('div.id-tag-container');
+        const DAOlistContainer = userNameBox.querySelector('div.daolist-container');
+        if(idTagContainer) idTagContainer.remove();
+        if(DAOlistContainer) DAOlistContainer.remove();
+    }
+}
+
+const resetProfilePage = () => {
+    const userNameBox = document.querySelector('[data-testid="UserName"]');
+        if (userNameBox) appendIdTagTo(userNameBox);
+}
 
 
-export { detectProfilePage };
+
+export { detectProfilePage, pauseControlProfilePage, resetProfilePage };

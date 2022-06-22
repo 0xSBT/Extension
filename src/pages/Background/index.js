@@ -6,6 +6,7 @@ const imgURL_hi = baseURL + "KlayBee/hi.gif"
 const imgURL_fly = baseURL + "KlayBee/fly.gif"
 const imgURL_PDAO = baseURL + 'PDAO/logo.png';
 const imgURL_PDAO_pepe = baseURL + 'PDAO/pepe.png'
+const imgURL_PDAO_pepe2 = baseURL + 'PDAO/pepe2.png'
 const imgURL_OOAK = baseURL + 'OOAK/logo.png'
 const imgURL_OOAK_ID_TAG = baseURL + 'OOAK/ID_TAG.png'
 
@@ -15,6 +16,7 @@ emoteCommandToURL.set("KlayBee_hi", imgURL_hi);
 emoteCommandToURL.set("KlayBee_fly", imgURL_fly);
 emoteCommandToURL.set("PDAO", imgURL_PDAO);
 emoteCommandToURL.set("PDAO_pepe", imgURL_PDAO_pepe);
+emoteCommandToURL.set("PDAO_pepe2", imgURL_PDAO_pepe2);
 emoteCommandToURL.set("OOAK",imgURL_OOAK);
 emoteCommandToURL.set("OOAK_ID_TAG",imgURL_OOAK_ID_TAG);
 //test img 추가
