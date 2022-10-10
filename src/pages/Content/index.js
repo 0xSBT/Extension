@@ -1,5 +1,5 @@
 import { appendModal, modalToggleRunning } from './modules/injectModal';
-import { detectProfilePage, pauseControlProfilePage, resetProfilePage} from './modules/profile';
+import { detectProfilePage, pauseControlProfilePage, resetProfilePage } from './modules/profile';
 
 //global scope variable
 let detectNodeWithInterval;
@@ -109,7 +109,7 @@ const targetObserver = new MutationObserver(async (mutationList, observer) => {
 });
 
 //create ooak-icon img
-const createIdTagImgEl =  () => {
+const createIdTagImgEl = () => {
     const ooak_icon_src = 'https://d22p4hblaqdu3x.cloudfront.net/ID_TAG_ICONS/logo18.png';
     const imgEl = document.createElement('IMG');
     imgEl.setAttribute('class', 'id-tag-img');
