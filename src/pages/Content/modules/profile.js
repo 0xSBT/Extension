@@ -5,9 +5,9 @@ const detectProfilePage = () => {
     const PROFILE_INTERVAL = 1000; //ms
     let count = 0;
 
-    let detectProfileWithInterval = setInterval(()=>{
+    let detectProfileWithInterval = setInterval(() => {
         const userNameBox = document.querySelector('[data-testid="UserName"]');
-        if (userNameBox) {       
+        if (userNameBox) {
             appendIdTagTo(userNameBox);
             clearInterval(detectProfileWithInterval)
         } else {
@@ -45,10 +45,10 @@ const appendIdTagTo = (targetNode) => {
             alert('서버에 문제가 생겨 복구 중입니다...')
         })
 
-        
+
 
     } else if (targetId === 'id-tag-appended') { //else if appended
-        
+
         let userId = targetNode.innerText.split('@')[1];
         userId = userId.split('\n')[0];
         const serverURL = `${baseURL}idtag?twitterId=${userId}`;
@@ -58,7 +58,7 @@ const appendIdTagTo = (targetNode) => {
                 //id tag
                 const nickname = res.data.idTag;
                 const textDiv = targetNode.querySelector('div.id-tag-text-box');
-                if(textDiv) {
+                if (textDiv) {
                     textDiv.innerText = nickname;
                 } else {
                     const idTagEl = createIdTagEl(nickname);
@@ -67,7 +67,7 @@ const appendIdTagTo = (targetNode) => {
                 //dao list
                 const DAOArr = res.data.DAO;
                 const DAOlistContainer = targetNode.querySelector('div.daolist-container');
-                if(DAOlistContainer) {
+                if (DAOlistContainer) {
                     DAOlistContainer.remove();
                     const DAOlistEl = createDAOlistEl(DAOArr);
                     targetNode.appendChild(DAOlistEl);
@@ -79,8 +79,8 @@ const appendIdTagTo = (targetNode) => {
                 targetNode.removeAttribute('id');
                 const idTagContainer = targetNode.querySelector('div.id-tag-container');
                 const DAOlistContainer = targetNode.querySelector('div.daolist-container');
-                if(idTagContainer) idTagContainer.remove();
-                if(DAOlistContainer) DAOlistContainer.remove();
+                if (idTagContainer) idTagContainer.remove();
+                if (DAOlistContainer) DAOlistContainer.remove();
             }
         }).catch((err) => {
             console.log(err)
@@ -97,7 +97,7 @@ const createIdTagEl = (nickname) => {
     const textDiv = document.createElement('div');
     const src = 'https://d22p4hblaqdu3x.cloudfront.net/ID_TAG_ICONS/logo18.png';
     const href = 'https://theooak.io';
-    
+
     rootDiv.setAttribute('class', 'id-tag-container');
     rootDiv.setAttribute('aria-label', 'ID Tag');
     linkEl.setAttribute('href', href);
@@ -146,18 +146,18 @@ const createDAOEl = (name, imgPath, href) => {
 
 const pauseControlProfilePage = () => {
     const userNameBox = document.querySelector('[data-testid="UserName"]');
-    if(userNameBox){
+    if (userNameBox) {
         userNameBox.removeAttribute('id');
         const idTagContainer = userNameBox.querySelector('div.id-tag-container');
         const DAOlistContainer = userNameBox.querySelector('div.daolist-container');
-        if(idTagContainer) idTagContainer.remove();
-        if(DAOlistContainer) DAOlistContainer.remove();
+        if (idTagContainer) idTagContainer.remove();
+        if (DAOlistContainer) DAOlistContainer.remove();
     }
 }
 
 const resetProfilePage = () => {
     const userNameBox = document.querySelector('[data-testid="UserName"]');
-        if (userNameBox) appendIdTagTo(userNameBox);
+    if (userNameBox) appendIdTagTo(userNameBox);
 }
 
 
