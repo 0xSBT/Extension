@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // find profile btn 
-const detectProfilePage = () => {
+const modifyProfilePage = () => {
     const PROFILE_INTERVAL = 1000; //ms
     let count = 0;
 
@@ -163,4 +163,4 @@ const resetProfilePage = () => {
 
 
 
-export { detectProfilePage, pauseControlProfilePage, resetProfilePage };
+export { modifyProfilePage, pauseControlProfilePage, resetProfilePage };

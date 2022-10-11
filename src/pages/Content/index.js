@@ -1,4 +1,4 @@
-import { detectProfilePage, pauseControlProfilePage, resetProfilePage } from './modules/profile';
+import { modifyProfilePage, pauseControlProfilePage, resetProfilePage } from './modules/profile';
 import * as Caver from 'caver-js/index';
 import ABI from './abi.json';
 
@@ -51,7 +51,7 @@ const detectRouteChange = () => {
                 stop();//clearInterval
                 start();
                 isChanged = true;
-                detectProfilePage();
+                modifyProfilePage();
             } else {
                 stop();//clearInterval
                 isChanged = true;
@@ -71,7 +71,7 @@ const detectRouteChange = () => {
                         stop();//clearInterval
                         start();
                         isChanged = true;
-                        detectProfilePage();
+                        modifyProfilePage();
                     } else {
                         stop();//clearInterval
                         isChanged = true;
@@ -134,11 +134,11 @@ const init = async () => {
         await chrome.storage.sync.set({ isExtensionOn: true });
         start();
         detectRouteChange();
-        detectProfilePage();
+        modifyProfilePage();
     } else if (result.lastState === "ON") {
         stop();
         start();
-        detectProfilePage();
+        modifyProfilePage();
         detectRouteChange();
     } else if (result.lastState === "OFF") {
         stop();
