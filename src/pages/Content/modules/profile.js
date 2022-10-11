@@ -138,7 +138,7 @@ const createSoulTagEl = (hasSoul) => {
     const linkEl = document.createElement('a');
     const imgEl = document.createElement('img');
     const textDiv = document.createElement('div');
-    const src = 'https://d22p4hblaqdu3x.cloudfront.net/ID_TAG_ICONS/logo18.png';
+    const src = 'https://d22p4hblaqdu3x.cloudfront.net/Soul/soul-32.png';
     const href = 'https://da0xsbt.xyz';
 
     rootDiv.setAttribute('class', 'id-tag-container');
@@ -150,7 +150,7 @@ const createSoulTagEl = (hasSoul) => {
     imgDiv.setAttribute('class', 'id-tag-img-container id-tag-flex-box hint--top hint--rounded')
     imgDiv.setAttribute('aria-label', 'SOUL TAG');
     textDiv.setAttribute('class', 'id-tag-flex-box id-tag-text-box');
-    textDiv.innerText = hasSoul ? "I have SOUL!" : "I do not have SOUL...";
+    textDiv.innerText = hasSoul ? "0xSOUL" : "I do not have SOUL...";
 
     linkEl.appendChild(imgEl);
     imgDiv.appendChild(linkEl);
@@ -170,7 +170,7 @@ const pauseControlProfilePage = () => {
 
 const resetProfilePage = () => {
     const userNameBox = document.querySelector('[data-testid="UserName"]');
-    if (userNameBox) appendIdTagTo(userNameBox);
+    if (userNameBox) appendTagTo(userNameBox);
 }
 
 

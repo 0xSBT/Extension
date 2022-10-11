@@ -56,7 +56,7 @@ const Popup = () => {
         </div>
       </div>
       <div className="main">
-        {/* <span><img src="https://d22p4hblaqdu3x.cloudfront.net/KlayBee/hi.gif" alt="KlayBee" width="64" /></span> */}
+        <span><img src="https://d22p4hblaqdu3x.cloudfront.net/0xSBT/sbt-h-128.png" alt="KlayBee" width="64" /></span>
         <span className="main-text">Join DA0xSBT</span>
       </div>
     </div>

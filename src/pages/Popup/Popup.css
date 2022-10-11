@@ -4,7 +4,7 @@ body {
 }
 
 App {
-  background-color: white;
+  background-color: #F5F5F5;
 }
 
 .header {
@@ -32,16 +32,18 @@ App {
 .main {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 1.25rem;
   font-family: 'Inter', sans-serif;
-  margin: 20px 20px 20px 20px;
+  padding: 1rem;
+  background-color: #F5F5F5;
 }
 
 .main-text {
-  margin-left: 12px;
+  margin-left: 1rem;
 }
 
 .toggleButton {
+  cursor: pointer;
   margin-left: 35px;
   background-color: gray;
   width: 40px;
@@ -58,7 +60,7 @@ App {
   width: 16px;
   height: 16px;
   border: none;
-  background-color: white;
+  background-color: #F5F5F5;
   border-radius: 50%;
   transition: 0.5s;
   margin-right: 0;
