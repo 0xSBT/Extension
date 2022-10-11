@@ -17,8 +17,8 @@ emoteCommandToURL.set("KlayBee_fly", imgURL_fly);
 emoteCommandToURL.set("PDAO", imgURL_PDAO);
 emoteCommandToURL.set("PDAO_pepe", imgURL_PDAO_pepe);
 emoteCommandToURL.set("PDAO_pepe2", imgURL_PDAO_pepe2);
-emoteCommandToURL.set("OOAK",imgURL_OOAK);
-emoteCommandToURL.set("OOAK_ID_TAG",imgURL_OOAK_ID_TAG);
+emoteCommandToURL.set("OOAK", imgURL_OOAK);
+emoteCommandToURL.set("OOAK_ID_TAG", imgURL_OOAK_ID_TAG);
 //test img 추가
 
 
@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       success: false,
       result: ''
     };
-    if (url === undefined || url ==='') {
+    if (url === undefined || url === '') {
       response = {
         success: false,
         result: ''
@@ -53,15 +53,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const state = request.state;
     if (state === "ON") {
       chrome.action.setBadgeText({ text: "" })
-      sendResponse({success: true})
-    } else if(state === "OFF") {
+      sendResponse({ success: true })
+    } else if (state === "OFF") {
       chrome.action.setBadgeText({ text: "OFF" })
       chrome.action.setBadgeBackgroundColor(
-          { color: "red" }
+        { color: "red" }
       );
-      sendResponse({success: true})
+      sendResponse({ success: true })
     } else {
-      sendResponse({success: false})
+      sendResponse({ success: false })
     }
   }
 });

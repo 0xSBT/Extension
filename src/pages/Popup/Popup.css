@@ -8,11 +8,11 @@ App {
 }
 
 .header {
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(0, 0, 0, 0.85);
   padding: 20px;
   display: flex;
   align-items: center;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
 }
 
 .header-text {
@@ -24,7 +24,7 @@ App {
 }
 
 .header-right {
-  margin-left : 0px;
+  margin-left: 0px;
   display: flex;
   justify-content: right;
 }
@@ -41,25 +41,25 @@ App {
   margin-left: 12px;
 }
 
-.toggleButton{ 
+.toggleButton {
   margin-left: 35px;
   background-color: gray;
-  width: 40px; 
-  min-width: 40px; 
-   display: block; 
-   padding: 4px; 
-   border: none; 
-   border-radius: 60px; 
-   transition: 0.5s; 
- } 
- 
-.toggleSwitchCircle { 
-   display: block; 
-   width: 16px; 
-   height: 16px; 
-   border: none; 
-   background-color: white;
-   border-radius: 50%; 
-   transition: 0.5s; 
-   margin-right:0;
- }
+  width: 40px;
+  min-width: 40px;
+  display: block;
+  padding: 4px;
+  border: none;
+  border-radius: 60px;
+  transition: 0.5s;
+}
+
+.toggleSwitchCircle {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.5s;
+  margin-right: 0;
+}

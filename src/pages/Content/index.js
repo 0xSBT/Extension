@@ -22,7 +22,7 @@ const caverForCall = new Caver(
     ),
 );
 
-const address = '0x13A3920e58edbDdd5a49dBa7fd75f20f08F05E96';
+const address = '0x3129e91d0fA884c2F1916f5C9633Acba23b59fFc';
 const soulContractVer2 = new caverForCall.contract(ABI, address);
 const getSoulBalance = async address => {
     const balance = await soulContractVer2.methods.balanceOf(address).call();

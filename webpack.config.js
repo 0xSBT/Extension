@@ -156,7 +156,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-18.png',
+          from: 'src/assets/img/soul-16.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -165,7 +165,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-36.png',
+          from: 'src/assets/img/soul-32.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -174,7 +174,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-72.png',
+          from: 'src/assets/img/soul-64.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -183,7 +183,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-128.png',
+          from: 'src/assets/img/soul-128.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -192,34 +192,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/ooak-icon-48.png',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/assets/img/ooak-icon-144.png',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/assets/img/ooak-icon-256.png',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/assets/img/pdao-icon.png',
+          from: 'src/assets/img/soul-256.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
