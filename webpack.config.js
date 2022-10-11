@@ -108,6 +108,17 @@ var options = {
     extensions: fileExtensions
       .map((extension) => '.' + extension)
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+    fallback: {
+      fs: false,
+      net: false,
+      stream: require.resolve('stream-browserify'),
+      crypto: require.resolve('crypto-browserify'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      url: require.resolve("url"),
+      path: require.resolve("path-browserify"),
+    },
   },
   plugins: [
     new CleanWebpackPlugin({ verbose: false }),
@@ -259,12 +270,12 @@ var options = {
       chunks: ['popup'],
       cache: false,
     }),
-  //   new HtmlWebpackPlugin({
-  //     template: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.html'),
-  //     filename: 'devtools.html',
-  //     chunks: ['devtools'],
-  //     cache: false,
-  //   }),
+    //   new HtmlWebpackPlugin({
+    //     template: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.html'),
+    //     filename: 'devtools.html',
+    //     chunks: ['devtools'],
+    //     cache: false,
+    //   }),
     // new HtmlWebpackPlugin({
     //   template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
     //   filename: 'panel.html',
