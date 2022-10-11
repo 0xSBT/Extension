@@ -46,6 +46,10 @@ const Popup = () => {
     }
   }
 
+  const handleClick = () => {
+    alert('hi');
+  }
+
   return (
     <div className="App">
       <div className="header">
@@ -56,8 +60,16 @@ const Popup = () => {
         </div>
       </div>
       <div className="main">
-        <span><img src="https://d22p4hblaqdu3x.cloudfront.net/0xSBT/sbt-h-128.png" alt="KlayBee" width="64" /></span>
-        <span className="main-text">Join DA0xSBT</span>
+        {/* <span><img src="https://d22p4hblaqdu3x.cloudfront.net/0xSBT/sbt-h-128.png" alt="KlayBee" width="64" /></span> */}
+        <div className="main-txt-container">
+          <div className="main-btn-container">
+            <button className="main-btn txt-pink" onClick={handleClick}>
+              <div className="btn-txt-container">
+                Join DA0xSBT
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
