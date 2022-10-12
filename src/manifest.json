@@ -41,9 +41,9 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "Inter-Bold.ttf",
-        "Inter-Medium.ttf",
-        "RussoOne-Regular.ttf"
+        "RussoOne-Regular.ttf",
+        "Unbounded-Bold.ttf",
+        "Unbounded-Medium.ttf"
       ],
       "matches": [
         "https://*.twitter.com/*"

@@ -19,7 +19,7 @@ const caverForCall = new Caver(
         option,
     ),
 );
-const contractAddress = '0x31db97096E1037F79721aa2A36E024322A42A8Ac';
+const contractAddress = '0x465F2CeA7385Bea2711cA1b6b0A8c65108b1E3cF';
 const sbtContract = new caverForCall.contract(ABI, contractAddress);
 
 // find profile btn 
