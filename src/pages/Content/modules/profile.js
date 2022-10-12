@@ -1,7 +1,7 @@
 import * as Caver from 'caver-js/index';
 import ABI from '../abi.json';
 
-const CHAIN_ID = '1001'; //MAINNET 8217 TESTNET 1001
+const CHAIN_ID = '8217'; //MAINNET 8217 TESTNET 1001
 const KAS_KEY = 'Basic S0FTS05WTk1JNUw0OEpSTUpEM0ROMEk2OnVhZmR2ZURNVTVjUmVEMC0zcF9Zei01NHVobkxWbm84bkZ1bG16NG4=';
 const option = {
     headers: [
@@ -47,7 +47,7 @@ const appendTagTo = async (targetNode) => {
     if (targetId === null) {
         targetNode.setAttribute('id', 'id-tag-appended');
         const userId = targetNode.innerText.split('@')[1].split('\n')[0];
-        const addr = await sbtContract.methods.getAddressFromTwitterId(userId).call();
+        const addr = await sbtContract.methods.twitterIdToAddress(userId).call();
         const hasSoul = addr !== "0x0000000000000000000000000000000000000000" ? true : false;
         if (hasSoul) {
             const tagEl = createSoulTagEl(hasSoul);
@@ -56,7 +56,7 @@ const appendTagTo = async (targetNode) => {
     } else if (targetId === 'id-tag-appended') {
         const textDiv = targetNode.querySelector('div.id-tag-text-box');
         const userId = targetNode.innerText.split('@')[1].split('\n')[0];
-        const addr = await sbtContract.methods.getAddressFromTwitterId(userId).call();
+        const addr = await sbtContract.methods.twitterIdToAddress(userId).call();
         const hasSoul = addr !== "0x0000000000000000000000000000000000000000" ? true : false;
         if (!hasSoul) return;
         if (textDiv === undefined || textDiv === null) {

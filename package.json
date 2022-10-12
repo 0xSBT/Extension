@@ -1,6 +1,6 @@
 {
-  "name": "ooak-extension",
-  "version": "0.0.1",
+  "name": "DA0xSBT Extension",
+  "version": "0.1.0",
   "description": "A chrome extension, ooak-extension, built with React 17, Webpack 5, and Webpack Dev Server 4",
   "license": "MIT",
   "repository": {
