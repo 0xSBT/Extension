@@ -46,8 +46,12 @@ const Popup = () => {
     }
   }
 
-  const handleClick = () => {
+  const handleClickJoinBtn = () => {
     window.open("https://www.da0xsbt.xyz/soul", "_blank");
+  }
+
+  const handleClickVoteBtn = () => {
+    window.open("https://www.da0xsbt.xyz/rating", "_blank");
   }
 
   return (
@@ -63,11 +67,18 @@ const Popup = () => {
         <div className="logo-container">
           <img src="https://d22p4hblaqdu3x.cloudfront.net/0xSBT/sbt-h-128.png" alt="KlayBee" width="84" />
         </div>
-        <div className="main-txt-container">
+        <div className="main-btn-group-container">
           <div className="main-btn-container">
-            <button className="main-btn txt-pink" onClick={handleClick}>
+            <button className="main-btn txt-pink" onClick={handleClickJoinBtn}>
               <div className="btn-txt-container">
-                Join DA0xSBT
+                JOIN DA0xSBT
+              </div>
+            </button>
+          </div>
+          <div className="main-btn-container">
+            <button className="main-btn btn-white" onClick={handleClickVoteBtn}>
+              <div className="btn-txt-container">
+                VOTE FOR DAOs
               </div>
             </button>
           </div>
