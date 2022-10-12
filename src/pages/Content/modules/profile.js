@@ -22,7 +22,6 @@ const caverForCall = new Caver(
 const contractAddress = '0x31db97096E1037F79721aa2A36E024322A42A8Ac';
 const sbtContract = new caverForCall.contract(ABI, contractAddress);
 
-
 // find profile btn 
 const modifyProfilePage = () => {
     const PROFILE_INTERVAL = 1000; //ms
@@ -83,7 +82,7 @@ const createSoulTagEl = (hasSoul) => {
     imgEl.setAttribute('class', 'id-tag id-tag-img');
     imgEl.setAttribute('src', src);
     imgDiv.setAttribute('class', 'id-tag-img-container id-tag-flex-box hint--top hint--rounded')
-    imgDiv.setAttribute('aria-label', 'SOUL TAG');
+    imgDiv.setAttribute('aria-label', 'Join DA0xSBT');
     textDiv.setAttribute('class', 'id-tag-flex-box id-tag-text-box');
     textDiv.innerText = hasSoul ? "0xSOUL" : "I do not have SOUL...";
 
@@ -98,8 +97,8 @@ const pauseControlProfilePage = () => {
     const userNameBox = document.querySelector('[data-testid="UserName"]');
     if (userNameBox) {
         userNameBox.removeAttribute('id');
-        const idTagContainer = userNameBox.querySelector('div.soul-tag-container');
-        if (idTagContainer) idTagContainer.remove();
+        const soulTagContainer = userNameBox.querySelector('div.soul-tag-container');
+        if (soulTagContainer) soulTagContainer.remove();
     }
 }
 

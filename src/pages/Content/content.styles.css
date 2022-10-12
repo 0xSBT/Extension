@@ -13,6 +13,17 @@
     src: url("chrome-extension://__MSG_@@extension_id__/RussoOne-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Unbounded-Bold";
+    src: url("chrome-extension://__MSG_@@extension_id__/Unbounded-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Unbounded-Medium";
+    src: url("chrome-extension://__MSG_@@extension_id__/Unbounded-Medium.ttf");
+}
+
+
 #ooak-modal-root {
     position: absolute;
     width: 100%;
