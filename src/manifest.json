@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "ooak-extension",
-  "description": "A chrome extension for DAO, NFTs, Free memes and emotes",
+  "name": "DA0xSBT Extension",
+  "description": "Extension bridging DA0xSBT to Twitter",
   "background": {
     "service_worker": "background.bundle.js"
   },

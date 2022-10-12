@@ -47,20 +47,22 @@ const Popup = () => {
   }
 
   const handleClick = () => {
-    alert('hi');
+    window.open("https://www.da0xsbt.xyz/soul", "_blank");
   }
 
   return (
     <div className="App">
       <div className="header">
         <img src="./soul-256.png" alt="ooak-icon-256" width="48" />
-        <span className="header-text">DA0xSBT extension</span>
+        <span className="header-text">DA0xSBT Extension</span>
         <div className="toggleButton" onClick={() => { switchOnClicked(); }} style={{ 'backgroundColor': toggleSwitch.bgColor }}>
           <div className="toggleSwitchCircle" style={{ 'transform': toggleSwitch.transform }}></div>
         </div>
       </div>
       <div className="main">
-        {/* <span><img src="https://d22p4hblaqdu3x.cloudfront.net/0xSBT/sbt-h-128.png" alt="KlayBee" width="64" /></span> */}
+        <div className="logo-container">
+          <img src="https://d22p4hblaqdu3x.cloudfront.net/0xSBT/sbt-h-128.png" alt="KlayBee" width="84" />
+        </div>
         <div className="main-txt-container">
           <div className="main-btn-container">
             <button className="main-btn txt-pink" onClick={handleClick}>
@@ -71,7 +73,7 @@ const Popup = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

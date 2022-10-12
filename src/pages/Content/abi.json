@@ -249,7 +249,7 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "mintPrice",
+                "name": "mintPriceInKlay",
                 "type": "uint256"
             }
         ],

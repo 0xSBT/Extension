@@ -22,7 +22,7 @@ const caverForCall = new Caver(
     ),
 );
 
-const address = '0x3129e91d0fA884c2F1916f5C9633Acba23b59fFc';
+const address = '0x31db97096E1037F79721aa2A36E024322A42A8Ac';
 const soulContractVer2 = new caverForCall.contract(ABI, address);
 const getSoulBalance = async address => {
     const balance = await soulContractVer2.methods.balanceOf(address).call();
@@ -84,41 +84,7 @@ const detectRouteChange = () => {
 }
 
 const start = () => {
-    detectNodeWithInterval = setInterval(async () => {
-        const section = document.getElementsByTagName('section')[0];
-        let articleList;
-        let targetUnderObservation;
-        if (section) {
-            //continue
-            targetUnderObservation = section.children[1].children[0];
-            if (targetUnderObservation !== undefined) {
-                articleList = document.getElementsByTagName('article');
-                if (articleList[0] !== undefined) {
-                    const length = document.getElementsByTagName('article').length;
-                    for (let i = 0; i < length; i++) {
-                        if (articleList[i]) {
-                            let emoteIsAdded = articleList[i].getAttribute('data-ooak-emote');
-                            // emoteIsAdded >> true or null                            
-                            if (!emoteIsAdded) {
-                                // console.log(emoteCommand);
-                                // console.log("emote url : " + emoteURL);
-                            }
-                        }
-                    }
-                    //add Emote-Button To Toolbar
-                    let refDiv = document.querySelectorAll('div[data-testid="toolBar"]')[0];
-                    if (refDiv) {
-                        refDiv = refDiv.children[0];
-                        if (refDiv.lastChild.dataset.testid !== 'emoteButton') {
-                        }
-                    }
-                    // detect mutation that articles (appear/hide)
-                    // clear interval
-                    clearInterval(detectNodeWithInterval);
-                }
-            }
-        }
-    }, DETECT_NODE_INTERVAL);
+
 }
 
 const stop = () => {
@@ -138,8 +104,8 @@ const init = async () => {
     } else if (result.lastState === "ON") {
         stop();
         start();
-        modifyProfilePage();
         detectRouteChange();
+        modifyProfilePage();
     } else if (result.lastState === "OFF") {
         stop();
         chrome.runtime.sendMessage({

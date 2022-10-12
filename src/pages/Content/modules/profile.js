@@ -19,7 +19,7 @@ const caverForCall = new Caver(
         option,
     ),
 );
-const contractAddress = '0xA75C4980Cfac23f268368eBb5507D70B14a1f484';
+const contractAddress = '0x31db97096E1037F79721aa2A36E024322A42A8Ac';
 const sbtContract = new caverForCall.contract(ABI, contractAddress);
 
 
@@ -45,12 +45,9 @@ const modifyProfilePage = () => {
 const appendTagTo = async (targetNode) => {
     targetNode.setAttribute('id', 'id-tag-appended');
     const targetId = targetNode.getAttribute('id');
-    // console.log(targetNode);
     if (targetId === null) {
         targetNode.setAttribute('id', 'id-tag-appended');
-        // console.log(targetId);
         const userId = targetNode.innerText.split('@')[1].split('\n')[0];
-        // console.log(userId);
         const addr = await sbtContract.methods.getAddressFromTwitterId(userId).call();
         const hasSoul = addr !== "0x0000000000000000000000000000000000000000" ? true : false;
         if (hasSoul) {
@@ -68,68 +65,6 @@ const appendTagTo = async (targetNode) => {
             targetNode.appendChild(tagEl);
         }
     }
-    // if (targetId === null) { // if not appended
-    //     targetNode.setAttribute('id', 'id-tag-appended');
-    //     let userId = targetNode.innerText.split('@')[1];
-    //     userId = userId.split('\n')[0];
-    //     console.log(userId);
-    //     const serverURL = `${baseURL}idtag?twitterId=${userId}`;
-    //     axios.get(serverURL).then((res) => {
-    //         const result = res.data.result;
-    //         if (result === "success") {
-    //             //id tag
-    //             const nickname = res.data.idTag;
-    //             const idTagEl = createIdTagEl(nickname);
-    //             targetNode.appendChild(idTagEl);
-    //             //dao list
-    //             const DAOArr = res.data.DAO;
-    //             const DAOlistEl = createDAOlistEl(DAOArr);
-    //             targetNode.appendChild(DAOlistEl);
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err)
-    //         alert('서버에 문제가 생겨 복구 중입니다...')
-    //     })
-    // } else if (targetId === 'id-tag-appended') { //else if appended
-
-    //     let userId = targetNode.innerText.split('@')[1];
-    //     userId = userId.split('\n')[0];
-    //     const serverURL = `${baseURL}idtag?twitterId=${userId}`;
-    //     axios.get(serverURL).then((res) => {
-    //         const result = res.data.result;
-    //         if (result === "success") {
-    //             //id tag
-    //             const nickname = res.data.idTag;
-    //             const textDiv = targetNode.querySelector('div.id-tag-text-box');
-    //             if (textDiv) {
-    //                 textDiv.innerText = nickname;
-    //             } else {
-    //                 const idTagEl = createIdTagEl(nickname);
-    //                 targetNode.appendChild(idTagEl);
-    //             }
-    //             //dao list
-    //             const DAOArr = res.data.DAO;
-    //             const DAOlistContainer = targetNode.querySelector('div.daolist-container');
-    //             if (DAOlistContainer) {
-    //                 DAOlistContainer.remove();
-    //                 const DAOlistEl = createDAOlistEl(DAOArr);
-    //                 targetNode.appendChild(DAOlistEl);
-    //             } else {
-    //                 const DAOlistEl = createDAOlistEl(DAOArr);
-    //                 targetNode.appendChild(DAOlistEl);
-    //             }
-    //         } else {
-    //             targetNode.removeAttribute('id');
-    //             const idTagContainer = targetNode.querySelector('div.id-tag-container');
-    //             const DAOlistContainer = targetNode.querySelector('div.daolist-container');
-    //             if (idTagContainer) idTagContainer.remove();
-    //             if (DAOlistContainer) DAOlistContainer.remove();
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err)
-    //         alert('서버에 문제가 생겨 복구 중입니다...')
-    //     })
-    // }
 }
 
 const createSoulTagEl = (hasSoul) => {
@@ -141,7 +76,7 @@ const createSoulTagEl = (hasSoul) => {
     const src = 'https://d22p4hblaqdu3x.cloudfront.net/Soul/soul-32.png';
     const href = 'https://da0xsbt.xyz';
 
-    rootDiv.setAttribute('class', 'id-tag-container');
+    rootDiv.setAttribute('class', 'soul-tag-container');
     rootDiv.setAttribute('aria-label', 'Soul-Tag');
     linkEl.setAttribute('href', href);
     linkEl.setAttribute('target', '_blank');
@@ -163,7 +98,7 @@ const pauseControlProfilePage = () => {
     const userNameBox = document.querySelector('[data-testid="UserName"]');
     if (userNameBox) {
         userNameBox.removeAttribute('id');
-        const idTagContainer = userNameBox.querySelector('div.id-tag-container');
+        const idTagContainer = userNameBox.querySelector('div.soul-tag-container');
         if (idTagContainer) idTagContainer.remove();
     }
 }
