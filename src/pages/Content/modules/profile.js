@@ -2,7 +2,7 @@ import * as Caver from 'caver-js/index';
 import ABI from '../abi.json';
 
 const CHAIN_ID = '8217'; //MAINNET 8217 TESTNET 1001
-const KAS_KEY = 'Basic S0FTS05WTk1JNUw0OEpSTUpEM0ROMEk2OnVhZmR2ZURNVTVjUmVEMC0zcF9Zei01NHVobkxWbm84bkZ1bG16NG4=';
+const KAS_KEY = process.env.REACT_APP_PRIVATE_KEY;
 const option = {
     headers: [
         {
